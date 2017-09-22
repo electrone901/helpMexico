@@ -17,6 +17,7 @@ const caseRoute = router.caseRoute;
 
 //CALL FILE, CREATE DB
 require('./seeds/case-seed.js');
+
 var cors = require('cors');
 app.use(cors());
 //arses the text as URL encoded data 
