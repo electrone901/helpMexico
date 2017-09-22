@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const cors = require('cors');
 //extracting only the data that it needs
 const bodyParser = require('body-parser');
 //Sequelize allow to to talk to db 
@@ -8,12 +9,12 @@ const Sequelize = require('sequelize');
 const sequelizeConnection = require('./db');
 
 //servers static files
-//heroku complains
 // app.use(express.static(path.join(__dirname, '/front/bundle')));
 
 //ROUTES//
 const router = require('./routes');
 const caseRoute = router.caseRoute;
+app.use(cors());
 
 //CALL FILE, CREATE DB
 require('./seeds/case-seed.js');
@@ -28,6 +29,7 @@ app.listen(PORT, () => console.log('Listening on port', PORT));
 
 //ROUTER URL PATHS//
 app.use('/api/cases', caseRoute);
+
 
 
 // app.get('/*', (req, res) => {
