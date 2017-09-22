@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const cors = require('cors');
 //extracting only the data that it needs
 const bodyParser = require('body-parser');
 //Sequelize allow to to talk to db 
@@ -14,11 +13,12 @@ const sequelizeConnection = require('./db');
 //ROUTES//
 const router = require('./routes');
 const caseRoute = router.caseRoute;
-app.use(cors());
+
 
 //CALL FILE, CREATE DB
 require('./seeds/case-seed.js');
-
+var cors = require('cors');
+app.use(cors());
 //arses the text as URL encoded data 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -30,8 +30,3 @@ app.listen(PORT, () => console.log('Listening on port', PORT));
 //ROUTER URL PATHS//
 app.use('/api/cases', caseRoute);
 
-
-
-// app.get('/*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '/front/index.html'));
-// });
